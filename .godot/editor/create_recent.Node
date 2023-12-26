@@ -1,0 +1,9 @@
+Label
+FileDialog
+TextureRect
+TextEdit
+LineEdit
+VBoxContainer
+PanelContainer
+Panel
+HSplitContainer

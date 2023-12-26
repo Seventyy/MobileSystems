@@ -1,3 +1,9 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1703018697
+::res://::1703554468
 icon.svg::CompressedTexture2D::2779012339193492071::1703018691::1703018698::1::::<><>::
+README.md::TextFile::-1::1703018852::0::1::::<><>::
+main.tscn::PackedScene::5906418173043427105::1703553671::0::1::::<><>::
+list_view.tscn::PackedScene::1867864505130689358::1703554426::0::1::::<><>::uid://votuvxgm2ap8::::res://list_entry.tscn
+list_entry.tscn::PackedScene::1504057482506742583::1703554422::0::1::::<><>::
+edit_view.tscn::PackedScene::6453751059439271355::1703554525::0::1::::<><>::
+list_entry.tres::LabelSettings::6647026047683848518::1703554541::0::1::::<><>::
