@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://45hrtpqplhvx"]
+
+[ext_resource type="Texture2D" uid="uid://brf6r78pf7lhh" path="res://icons/star.svg" id="1_02d7p"]
+[ext_resource type="Script" path="res://stars.gd" id="1_u0nbm"]
+
+[node name="Stars" type="HBoxContainer"]
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("1_u0nbm")
+
+[node name="Star" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_02d7p")
+
+[node name="Star2" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_02d7p")
+
+[node name="Star3" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_02d7p")
+
+[node name="Star4" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_02d7p")
+
+[node name="Star5" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_02d7p")
