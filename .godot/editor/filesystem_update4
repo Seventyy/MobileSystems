@@ -1,9 +1,0 @@
-res://screens/entry_view.tscn
-res://main.tscn
-res://screens/entry_add.tscn
-res://screens/entry_list.tscn
-res://autoload/gui.tscn
-res://stars.tscn
-res://main.gd
-res://screens/entry_list.gd
-res://autoload/gui.gd
