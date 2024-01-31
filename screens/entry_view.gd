@@ -7,9 +7,9 @@ var current_entry: Entry = null
 func load_entry(entry: Entry) -> void:
 	current_entry = entry
 	%Name.text = entry.name
-	%Photo.texture = entry.photo
 	%Date.text = entry.date_of_visit
 	%Description.text = entry.description
+	%Image.texture = load("res://pictures/image" + str(entry.image) + ".png")
 	%Stars.update(entry.rating)
 
 

@@ -1,12 +1,52 @@
-[gd_scene load_steps=6 format=3 uid="uid://dv6fr3a2m6u8k"]
+[gd_scene load_steps=23 format=3 uid="uid://dv6fr3a2m6u8k"]
 
 [ext_resource type="Script" path="res://screens/entry_add.gd" id="1_xg2ji"]
 [ext_resource type="Texture2D" uid="uid://trgyvin57dyf" path="res://icons/confirm.svg" id="2_eyafi"]
 [ext_resource type="PackedScene" uid="uid://45hrtpqplhvx" path="res://stars.tscn" id="2_jj6h3"]
+[ext_resource type="Texture2D" uid="uid://ccac8rkepghvc" path="res://pictures/image0.png" id="3_b61hr"]
+[ext_resource type="PackedScene" uid="uid://cvlhyurvy5ixn" path="res://entry_image.tscn" id="3_isnm1"]
 [ext_resource type="Texture2D" uid="uid://cewj0vrhgo1n5" path="res://icons/close.svg" id="3_nocej"]
+[ext_resource type="Texture2D" uid="uid://ka66deq7rcar" path="res://pictures/image1.png" id="4_geeb6"]
+[ext_resource type="Texture2D" uid="uid://t8ihgppc4uh" path="res://pictures/image2.png" id="5_1p2rp"]
+[ext_resource type="Texture2D" uid="uid://c8q8mj8286f1w" path="res://pictures/image3.png" id="6_n0v7h"]
+[ext_resource type="Texture2D" uid="uid://cbp6g48kfo2xb" path="res://pictures/image4.png" id="7_i1dnt"]
+[ext_resource type="Texture2D" uid="uid://3udc0uvbshvb" path="res://pictures/image5.png" id="8_omi3o"]
+[ext_resource type="Texture2D" uid="uid://c6yolpfnd41px" path="res://pictures/image6.png" id="9_7kav0"]
+[ext_resource type="Texture2D" uid="uid://dsuvpkvlfhmnl" path="res://pictures/image7.png" id="10_r5rcc"]
+[ext_resource type="Texture2D" uid="uid://cqol6yc6kl54o" path="res://pictures/image8.png" id="11_2qgno"]
+[ext_resource type="Texture2D" uid="uid://bpr630lcf3bwy" path="res://pictures/image9.png" id="12_8gxey"]
+[ext_resource type="Texture2D" uid="uid://cvtfnpcyehe3" path="res://pictures/image10.png" id="13_4oepl"]
+[ext_resource type="Texture2D" uid="uid://58fxmds0do01" path="res://pictures/image11.png" id="14_vxj45"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nv2vn"]
 font_size = 72
+
+[sub_resource type="Theme" id="Theme_c6qwc"]
+default_font_size = 42
+
+[sub_resource type="GDScript" id="GDScript_pq7id"]
+script/source = "class_name ImagesGrid extends GridContainer
+
+var selected_image:int
+
+func _ready() -> void:
+	for i in get_children():
+		i.pressed.connect(func(): select_image(i.get_index()))
+
+func select_image(id:int)->void:
+	get_child(selected_image).get_child(0).visible = false
+	selected_image = id
+	get_child(id).get_child(0).visible = true
+
+"
+
+[sub_resource type="Gradient" id="Gradient_otfay"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8tguk"]
+gradient = SubResource("Gradient_otfay")
+width = 100
+height = 100
+fill_to = Vector2(1, 1)
 
 [node name="EntryAdd" type="Control"]
 layout_mode = 3
@@ -49,13 +89,14 @@ label_settings = SubResource("LabelSettings_nv2vn")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Atributes" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/v_separation = 30
-columns = 2
 
-[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
+[node name="NameSplit" type="HSplitContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/NameSplit"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 56
@@ -63,20 +104,185 @@ text = "Place Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Name" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
+[node name="NameEdit" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/NameSplit"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 4
 theme_override_font_sizes/font_size = 42
 
-[node name="DateLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
+[node name="DateSplit" type="HSplitContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes"]
+layout_mode = 2
+dragger_visibility = 2
+
+[node name="DateLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/DateSplit"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 56
 text = "Date"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DateEdit" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/DateSplit"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 42
+placeholder_text = "YYYY.MM.DD"
+virtual_keyboard_type = 3
+
+[node name="DateEditOld" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/DateSplit"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Day" type="SpinBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/DateSplit/DateEditOld"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_c6qwc")
+min_value = 1.0
+max_value = 31.0
+value = 1.0
+
+[node name="Month" type="SpinBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/DateSplit/DateEditOld"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_c6qwc")
+min_value = 1.0
+max_value = 12.0
+value = 1.0
+
+[node name="Year" type="SpinBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/DateSplit/DateEditOld"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = SubResource("Theme_c6qwc")
+min_value = 1990.0
+max_value = 2024.0
+value = 1990.0
+
+[node name="Control" type="HSplitContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes"]
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Control"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 56
+text = "Description"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionEdit" type="TextEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Control"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 42
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[node name="Rating" type="HSplitContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes"]
+layout_mode = 2
+
+[node name="RatingLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Rating"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 56
+text = "Rating"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Rating"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RatingEdit" type="HSlider" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Rating/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Stars" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Rating/VBoxContainer" instance=ExtResource("2_jj6h3")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ImageLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Image"
+horizontal_alignment = 1
+
+[node name="Images" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_vertical = 0
+columns = 3
+script = SubResource("GDScript_pq7id")
+
+[node name="EntryImage" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Images" instance=ExtResource("3_isnm1")]
+layout_mode = 2
+texture_normal = ExtResource("3_b61hr")
+
+[node name="EntryImage2" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Images" instance=ExtResource("3_isnm1")]
+layout_mode = 2
+texture_normal = ExtResource("4_geeb6")
+
+[node name="EntryImage3" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Images" instance=ExtResource("3_isnm1")]
+layout_mode = 2
+texture_normal = ExtResource("5_1p2rp")
+
+[node name="EntryImage4" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Images" instance=ExtResource("3_isnm1")]
+layout_mode = 2
+texture_normal = ExtResource("6_n0v7h")
+
+[node name="EntryImage5" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Images" instance=ExtResource("3_isnm1")]
+layout_mode = 2
+texture_normal = ExtResource("7_i1dnt")
+
+[node name="EntryImage6" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Images" instance=ExtResource("3_isnm1")]
+layout_mode = 2
+texture_normal = ExtResource("8_omi3o")
+
+[node name="EntryImage7" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Images" instance=ExtResource("3_isnm1")]
+layout_mode = 2
+texture_normal = ExtResource("9_7kav0")
+
+[node name="EntryImage8" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Images" instance=ExtResource("3_isnm1")]
+layout_mode = 2
+texture_normal = ExtResource("10_r5rcc")
+
+[node name="EntryImage9" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Images" instance=ExtResource("3_isnm1")]
+layout_mode = 2
+texture_normal = ExtResource("11_2qgno")
+
+[node name="EntryImage10" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Images" instance=ExtResource("3_isnm1")]
+layout_mode = 2
+texture_normal = ExtResource("12_8gxey")
+
+[node name="EntryImage11" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Images" instance=ExtResource("3_isnm1")]
+layout_mode = 2
+texture_normal = ExtResource("13_4oepl")
+
+[node name="EntryImage12" parent="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Images" instance=ExtResource("3_isnm1")]
+layout_mode = 2
+texture_normal = ExtResource("14_vxj45")
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/v_separation = 30
+columns = 2
 
 [node name="Date" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
@@ -95,10 +301,6 @@ text = "Year"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Year" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
-visible = false
-layout_mode = 2
-
 [node name="MonthLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
 visible = false
 layout_mode = 2
@@ -107,10 +309,6 @@ theme_override_font_sizes/font_size = 56
 text = "Month"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Month" type="OptionButton" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
-visible = false
-layout_mode = 2
 
 [node name="DayLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
 visible = false
@@ -121,88 +319,45 @@ text = "Day"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Day" type="OptionButton" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
-visible = false
-layout_mode = 2
-
-[node name="DescriptionLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
+[node name="ImageLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 0
 theme_override_font_sizes/font_size = 56
-text = "Description"
+text = "Image"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Description" type="TextEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
+[node name="ImageButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_font_sizes/font_size = 42
-wrap_mode = 1
-scroll_fit_content_height = true
+text = "Add image"
 
-[node name="RatingLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 56
-text = "Rating"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Rating" type="HSlider" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer/VBoxContainer"]
+[node name="ImageRect" type="TextureRect" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 1.0
-max_value = 5.0
-value = 1.0
-tick_count = 5
-ticks_on_borders = true
+texture = SubResource("GradientTexture2D_8tguk")
 
-[node name="Stars" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer/VBoxContainer" instance=ExtResource("2_jj6h3")]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer2" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -250.0
-offset_top = -250.0
-grow_horizontal = 0
-grow_vertical = 0
 size_flags_horizontal = 8
-size_flags_vertical = 10
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2"]
-layout_mode = 2
+size_flags_vertical = 8
 theme_override_constants/separation = 30
 
-[node name="Confirm" type="Button" parent="MarginContainer2/HBoxContainer"]
+[node name="Confirm" type="Button" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 icon = ExtResource("2_eyafi")
 icon_alignment = 1
 
-[node name="Cancel" type="Button" parent="MarginContainer2/HBoxContainer"]
+[node name="Cancel" type="Button" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 icon = ExtResource("3_nocej")
 icon_alignment = 1
 
-[connection signal="value_changed" from="MarginContainer/ScrollContainer/VBoxContainer/GridContainer/VBoxContainer/Rating" to="." method="_on_rating_value_changed"]
-[connection signal="pressed" from="MarginContainer2/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
-[connection signal="pressed" from="MarginContainer2/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="value_changed" from="MarginContainer/ScrollContainer/VBoxContainer/Atributes/Rating/VBoxContainer/RatingEdit" to="." method="_on_rating_value_changed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

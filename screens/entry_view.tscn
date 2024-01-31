@@ -87,13 +87,12 @@ text = "Description"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Description" type="TextEdit" parent="ScrollContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Description" type="RichTextLabel" parent="ScrollContainer/MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 42
-editable = false
-scroll_fit_content_height = true
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 42
+fit_content = true
 
 [node name="RatingLabel" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -106,6 +105,28 @@ vertical_alignment = 1
 [node name="Stars" parent="ScrollContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_tau1d")]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="ImageLabel" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 56
+text = "Image"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="ScrollContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment_vertical = 0
+
+[node name="Image" type="TextureRect" parent="ScrollContainer/MarginContainer/VBoxContainer/GridContainer/AspectRatioContainer"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1

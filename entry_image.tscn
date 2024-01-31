@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvlhyurvy5ixn"]
+
+[ext_resource type="Texture2D" uid="uid://trgyvin57dyf" path="res://icons/confirm.svg" id="2_u2huu"]
+
+[node name="EntryImage" type="TextureButton"]
+custom_minimum_size = Vector2(0, 300)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_u2huu")
+expand_mode = 1
